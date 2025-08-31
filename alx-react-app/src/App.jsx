@@ -18,8 +18,8 @@ function App() {
       <MainContent />
       <Footer />
       <WelcomeMessage />
-      <UserProfile name="Alex" age="25" bio="Loves hiking and photography" />
-      <UserProfile name="Bob" age="30" bio="Enjoys movies and reading" />
+      <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
+      <UserProfile name="Bob" age="30" bio="Enjoys coding and reading" />
     </div>
   );
 }
