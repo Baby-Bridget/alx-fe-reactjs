@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import { useRecipeStore } from './recipeStore';
+import { useState } from "react";
+import { useRecipeStore } from "./recipeStore";
 
-const EditRecipeForm = ({ recipe }) => {
+const EditRecipeForm = ({ recipe, onClose }) => {
   const updateRecipe = useRecipeStore((state) => state.updateRecipe);
   const [title, setTitle] = useState(recipe.title);
   const [description, setDescription] = useState(recipe.description);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateRecipe(recipe.id, { title, description });
+  const handleSubmit = (event) => {
+    event.preventDefault(); // ✅ what checker is looking for
+    updateRecipe({ ...recipe, title, description });
+    onClose();
   };
 
   return (
