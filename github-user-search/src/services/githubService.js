@@ -1,16 +1,28 @@
 import axios from "axios";
 
-export const fetchUsers = async ({ username, location, minRepos }) => {
-  try {
-    let query = username || "";
-    if (location) query += +location:${location};
-    if (minRepos) query += +repos:>=${minRepos};
+const BASE_URL = "https://api.github.com";
 
-    const url = https://api.github.com/search/users?q=${query};
-    const response = await axios.get(url);
-    return response.data.items; 
+export const fetchUserData = async (username) => {
+  try {
+    const response = await axios.get(${BASE_URL}/users/${username});
+    return response.data;
   } catch (error) {
-    console.error("Error fetching users:", error);
-    return [];
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+
+export const fetchAdvancedUsers = async (username, location, minRepos) => {
+  try {
+    let query = username ? ${username} in:login : "";
+
+    if (location) query += ` location:${location}`;
+    if (minRepos) query += ` repos:>=${minRepos}`;
+
+    const response = await axios.get(${BASE_URL}/search/users?q=${query});
+    return response.data.items;
+  } catch (error) {
+    console.error("Error fetching advanced users:", error);
+    throw error;
   }
 };
